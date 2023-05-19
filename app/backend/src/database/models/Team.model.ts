@@ -5,9 +5,9 @@ import db from '.';
 export interface TeamAtributes {
   id: number;
   teamName: string;
-};
+}
 
-export type TeamCreationalAtrubutes = Omit<TeamAtributes, 'id'>
+export type TeamCreationalAtrubutes = Omit<TeamAtributes, 'id'>;
 
 class TeamModel extends Model<TeamAtributes, TeamCreationalAtrubutes> {
   // declare <campo>: <tipo>;
@@ -16,10 +16,9 @@ class TeamModel extends Model<TeamAtributes, TeamCreationalAtrubutes> {
   declare teamName: string;
 }
 
-
 TeamModel.init({
   // ... Campos
-  id:{
+  id: {
     allowNull: false,
     autoIncrement: true,
     type: DataTypes.INTEGER,
@@ -32,7 +31,7 @@ TeamModel.init({
 }, {
   // ... Outras configs
   underscored: true,
-  sequelize: db ,
+  sequelize: db,
   tableName: 'teams',
   timestamps: false,
 });
