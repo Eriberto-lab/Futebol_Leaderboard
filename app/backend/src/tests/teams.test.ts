@@ -48,6 +48,16 @@ describe('Team Service', () => {
             expect(team.body).to.be.deep.equal(allTeams[0]);
     
         })
+
+        it('testa se passado um id inexistente na rota /teams:id retorna o erro 404',async () => {
+            Sinon.stub(TeamModel, 'findOne').resolves(null)
+    
+            const team = await chai.request(app).get('/teams/1');
+            
+            expect(team.status).to.be.equal(404);
+            expect(team.body).to.be.deep.equal( { message: 'Time não encontrado' });
+    
+        })
     })
 
     
