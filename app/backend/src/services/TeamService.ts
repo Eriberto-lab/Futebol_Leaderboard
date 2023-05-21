@@ -10,6 +10,8 @@ class TeamService {
   public static async getById(id: number) {
     const team = await TeamModel.findOne({ where: { id } });
 
+    if (!team) throw new Error('NOT FOUND');
+
     return team;
   }
 }
