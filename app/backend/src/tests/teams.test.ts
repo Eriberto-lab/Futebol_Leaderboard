@@ -40,7 +40,7 @@ describe('Team Service', () => {
         })
 
         it('testa se rota /teams:id retorna o time correto',async () => {
-            Sinon.stub(TeamModel, 'findById').resolves(allTeams[0])
+            Sinon.stub(TeamModel, 'findOne').resolves(allTeams[0] as TeamModel)
     
             const team = await chai.request(app).get('/teams/1');
             
