@@ -38,6 +38,16 @@ describe('Team Service', () => {
             expect(teams.body).to.be.deep.equal(allTeams);
     
         })
+
+        it('testa se rota /teams:id retorna o time correto',async () => {
+            Sinon.stub(TeamModel, 'findById').resolves(allTeams[0])
+    
+            const team = await chai.request(app).get('/teams/1');
+            
+            expect(team.status).to.be.equal(200);
+            expect(team.body).to.be.deep.equal(allTeams[0]);
+    
+        })
     })
 
     
