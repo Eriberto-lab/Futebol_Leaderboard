@@ -15,7 +15,10 @@ class UserModel extends Model<UserAtributes, UserCreationalAtrubutes> {
   // declare <campo>: <tipo>;
 
   declare id: number;
-  declare teamName: string;
+  declare username: string;
+  declare role: string;
+  declare email: string;
+  declare password: string;
 }
 
 UserModel.init({
