@@ -1,18 +1,26 @@
-import UserModel, { UserAtributes } from '../database/models/User.model';
+import { compareSync } from 'bcryptjs';
+import UserModel from '../database/models/User.model';
 
 class UserService {
-  public static async getAll(): Promise<UserAtributes[]> {
-    const allusers = await UserModel.findAll();
+  public static async login(email: string, password: string): Promise<string> {
+    const BAD_REQUEST = 'BAD_REQUEST';
+    const user = await UserModel.findOne({ where: { email } });
 
-    return allusers;
-  }
+    if (!user) {
+      throw new Error(BAD_REQUEST);
+    }
 
-  public static async getById(id: number) {
-    const user = await UserModel.findOne({ where: { id } });
+    if (!email || !password) {
+      throw new Error(BAD_REQUEST);
+    }
 
-    if (!user) throw new Error('NOT FOUND');
+    const isValidPassword = compareSync(password, user.password);
 
-    return user;
+    if (!isValidPassword) {
+      throw new Error(BAD_REQUEST);
+    }
+
+    return 'token';
   }
 }
 
