@@ -1,4 +1,5 @@
 import { compareSync } from 'bcryptjs';
+import { generateToken } from '../utils/jwt';
 import UserModel from '../database/models/User.model';
 
 class UserService {
@@ -20,7 +21,7 @@ class UserService {
       throw new Error(BAD_REQUEST);
     }
 
-    return 'token';
+    return generateToken(user.id);
   }
 }
 
