@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as cors from 'cors';
 import teamRouter from './routes/teams.routes';
 import { teamError, userError } from './middlewares/error.middleware';
 import userRouter from './routes/users.route';
@@ -8,9 +9,9 @@ class App {
 
   constructor() {
     this.app = express();
-
+    this.app.use(cors());
     this.config();
-
+    this.met();
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
@@ -25,7 +26,9 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+  }
 
+  private met(): void {
     this.app.use('/teams', teamRouter);
     this.app.use('/teams:id', teamRouter);
     this.app.use('/login', userRouter);

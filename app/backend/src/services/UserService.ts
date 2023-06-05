@@ -3,7 +3,7 @@ import { generateToken } from '../utils/jwt';
 import UserModel from '../database/models/User.model';
 
 class UserService {
-  public static async login(email: string, password: string): Promise<string> {
+  public static async login(email: string, password: string): Promise<object> {
     const BAD_REQUEST = 'BAD_REQUEST';
     const user = await UserModel.findOne({ where: { email } });
 
@@ -21,7 +21,9 @@ class UserService {
       throw new Error(BAD_REQUEST);
     }
 
-    return generateToken(user.id);
+    const token = { token: generateToken(user.id) };
+
+    return token;
   }
 }
 
