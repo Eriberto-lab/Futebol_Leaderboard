@@ -33,7 +33,7 @@ const tokenError = (req: Request, res: Response, next: NextFunction) => {
 
   console.log(verifyToken);
 
-  if (verifyToken === 'invalid token') {
+  if (verifyToken as string === 'invalid token') {
     return res.status(401).json({ message: 'Token must be a valid token' });
   }
 

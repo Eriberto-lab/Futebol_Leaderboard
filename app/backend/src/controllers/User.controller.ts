@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import Decode from '../types/decode';
 import UserService from '../services/UserService';
 import { decodeToken } from '../utils/jwt';
 
@@ -16,7 +17,8 @@ class UserController {
   public static userRole(req: Request, res: Response) {
     const { authorization } = req.headers;
 
-    const data: any = decodeToken(authorization as string);
+    const data: Decode = decodeToken(authorization as string);
+    console.log(data);
 
     return res.status(200).json({ role: data.role });
   }
