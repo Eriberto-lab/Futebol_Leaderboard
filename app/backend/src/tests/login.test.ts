@@ -17,13 +17,16 @@ describe('User Service', () => {
         Sinon.restore();
     })
     describe('testa funçao getAll', () => {
-        it('retorna um array com todos os user',async () => {
+        it('testa se passado email e senha corretos é retornado um token',async () => {
             // arrenge => dado um contexto
-            Sinon.stub(UserModel, 'findAll').resolves(allUsers as UserModel[])
+            // Sinon.stub(UserModel, 'findAll').resolves(allUsers as UserModel[])
+            const email = 'admin@admin.com'
+            const password = 'secret_admin'
+            const obj = {token: 'string'}
             // act => açao
-            const users = await UserService.getAll()
+            const users = await UserService.login(email, password);
             // assert => oq é esperado
-            chai.expect(users).to.be.equal(allUsers)
+            chai.expect(users).to.be.equals(Object)
             
         })
 

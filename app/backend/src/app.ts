@@ -32,6 +32,7 @@ class App {
     this.app.use('/teams', teamRouter);
     this.app.use('/teams:id', teamRouter);
     this.app.use('/login', userRouter);
+
     this.app.use(userError);
     this.app.use(teamError);
   }

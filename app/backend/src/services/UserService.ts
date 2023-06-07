@@ -21,9 +21,11 @@ class UserService {
       throw new Error(BAD_REQUEST);
     }
 
-    const token = { token: generateToken(user.id) };
+    const { role } = user;
 
-    return token;
+    const token = generateToken({ email, role });
+
+    return { token, role };
   }
 }
 

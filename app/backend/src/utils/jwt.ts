@@ -1,4 +1,4 @@
-import { Secret, SignOptions, sign, verify } from 'jsonwebtoken';
+import { JwtPayload, Secret, SignOptions, sign, verify } from 'jsonwebtoken';
 
 const secretKey: Secret = process.env.JWT_SECRET as string;
 
@@ -7,12 +7,9 @@ const configJWT: SignOptions = {
   algorithm: 'HS256',
 };
 
-const generateToken = (id: number) => {
-  const data = {
-    id,
-  };
+const generateToken = (payload: JwtPayload) => {
   const token = sign(
-    data,
+    payload,
     secretKey,
     configJWT,
   );
